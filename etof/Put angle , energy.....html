@@ -1,0 +1,200 @@
+<html>
+<head>
+  <title>Put angle , energy....</title>
+  <basefont face="Tahoma" size="2" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="exporter-version" content="Evernote Windows/303244 (en-US, DDL); Windows/5.1.2600 Service Pack 3 (Win32);"/>
+  <style>
+    body, td {
+      font-family: Tahoma;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+<a name="13194"/>
+<h1>Put angle , energy....</h1>
+
+<div>
+<span style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;"><img src="Put angle , energy...._files\en_todo.png"/> Put angle , energy.... 
+<div><img src="Put angle , energy...._files\en_todo [1].png"/>scan in energies and angles and to see the final ions inside of TOF</div><div><br/></div><div><br/></div><div>1</div><div>particles {<br/>
+  coordinates = 0,<br/>
+  standard_beam {<br/>
+    n = 1000,<br/>
+    tob = 0,<br/>
+    mass = 12,<br/>
+    charge = -1,<br/>
+    ke = 370,<br/>
+    cwf = 1,<br/>
+    color = 0,<br/>
+    direction = cone_direction_distribution {<br/>
+      axis = vector(1, 0, 0),<br/>
+   <b>   half_angle = _G.angle,</b><br/>
+      fill = true<br/>
+    },<br/>
+    position = circle_distribution {<br/>
+      center = vector(-150, 75, 26),<br/>
+      normal = vector(1, 0, 0),<br/>
+      radius = 5,<br/>
+      fill = true<br/>
+    }<br/>
+  }<br/>
+}<br/><div><br/></div><div>-------------------------</div><div><br/>
+local clock = os.clock<br/>
+function sleep(n)  -- seconds<br/>
+  local t0 = clock()<br/>
+  while clock() - t0 &lt;= n do end<br/>
+end<br/><br/><br/><br/><br/>
+_G.frun=&quot;run_det&quot;<br/>
+_G.angle=0 --   - einzel lens voltge, middle electrode<br/>
+_G.voltage=0 --   -  eizel lens position<br/><br/>
+main_dir=&quot;mkdir &quot;.._G.frun<br/>
+os.execute( main_dir)<br/><br/>
+cop1=&quot;copy pr3.fly2 &quot;.._G.frun..&quot;\\pr3.fly2&quot;<br/>
+cop2=&quot;copy pr3.lua &quot;.._G.frun..&quot;\\pr3.lua&quot;<br/>
+cop3=&quot;copy tune.lua &quot;.._G.frun..&quot;\\tune.lua&quot;<br/>
+os.execute(cop1)<br/>
+os.execute(cop2)<br/>
+os.execute(cop3)<br/><br/>
+ <br/>
+   for angle=0,10,1 do<br/>
+ <br/>
+     main_dir=&quot;mkdir &quot;.._G.frun..&quot;\\&quot;..voltage<br/>
+     os.execute( main_dir) <br/>
+     <br/>
+             for voltage=0,2000,100 do<br/>
+                      <br/>
+                       <b>  _G.angle=angle</b><br/>
+                         _G.voltage=voltage<br/>
+                         simion.command(&quot;fly --restore-potentials=0 pr3.iob&quot;)<br/>
+                         --    simion.command(&quot;fly  pr3.iob&quot;)<br/>
+                         sleep(1)<br/>
+                        <br/>
+             end<br/>
+       <br/>
+    end</div></div><div><br/></div><div><br/></div><div>simion.workbench_program()<br/><br/><br/>
+-- Adjustable dielectric constants inside and outside of cylinder.<br/><br/>
+-- Refine convergence objective (V).<br/><br/>
+adjustable step_size = 0.001 <br/>
+--adjustable angle = _G.angle <br/>
+--adjustable freq = _G.voltage<br/>
+n_in=0;<br/>
+nn_i=0;<br/><br/>
+--FIL=&quot;data35.data&quot;<br/>
+main_folder=_G.frun..&quot;\\&quot;-------.._G.freqa..&quot;\\&quot;<br/>
+--main_folder=_G.frun..&quot;\\&quot;<br/>
+FIL=main_folder..&quot;data&quot;.._G.angle*10<br/>
+FIL=FIL..&quot;y&quot;.._G.voltage*10<br/>
+DEAD_IONS=0<br/>
+FileHnd, ErrStr = io.open(FIL, &quot;w&quot;)<br/>
+--t={n=0,f=0}<br/><b>t={}<br/>
+     for i = 1, 1000 do<br/>
+         <br/>
+    t[i]={n=i,f1=0,f2=0,f3=0}    <br/>
+     end<br/>
+     print (t[1].n)</b><div><b>--- N - number of ions..<br/></b>local FlHnd<br/><br/>
+local function get_ke()<br/>
+  local speed = math.sqrt(ion_vx_mm^2 + ion_vy_mm^2 + ion_vz_mm^2)<br/>
+  return speed_to_ke(speed, ion_mass)<br/>
+end<br/><br/>
+function segment.initialize()<br/>
+---     n_i=-1;<br/>
+     --- flag=0<br/>
+     ----- t={ion_number.flag}<br/>
+end<br/>
+function segment.init_p_values()-- called on PA initialization to set voltages.<br/><br/>
+end<br/><br/>
+function segment.other_actions()<br/><b>flag=0<br/>
+--     t={ion_number}<br/>
+    <br/>
+          if( (ion_px_mm&gt;2) and (ion_py_mm&lt;80) and (ion_py_mm&gt;70)) then<br/>
+               if (t[ion_number].f1==0) then<br/>
+               t[ion_number].f1=1<br/>
+            --  print (&quot;n_in=&quot;,t[ion_number].f1,&quot;  n=&quot;,ion_number)<br/>
+               end<br/>
+                   <br/>
+                    --print(t[8])<br/>
+          end<br/><br/>
+              <br/>
+          if  (ion_py_mm&lt;-22)  then<br/>
+        -- FileHnd:write(&quot;  &quot;,ion_time_of_flight,&quot;  &quot;,ion_number,&quot; &quot;,ion_pz_mm,&quot; &quot;,ion_px_mm,&quot; &quot;,ion_py_mm,&quot; &quot;,ion_vz_mm,&quot; &quot;,ion_vx_mm,&quot; &quot;,ion_vy_mm,&quot;\n&quot;)<br/>
+        -- ion_splat=-2<br/>
+         <br/>
+         <br/>
+                    if (t[ion_number].f2==0) then<br/>
+               t[ion_number].f2=1<br/>
+              print (&quot;n_in=&quot;,t[ion_number].f2,&quot;  n=&quot;,ion_number)<br/>
+               end<br/>
+            end<br/>
+            if  (ion_py_mm&lt;-17)  then<br/>
+        -- FileHnd:write(&quot;  &quot;,ion_time_of_flight,&quot;  &quot;,ion_number,&quot; &quot;,ion_pz_mm,&quot; &quot;,ion_px_mm,&quot; &quot;,ion_py_mm,&quot; &quot;,ion_vz_mm,&quot; &quot;,ion_vx_mm,&quot; &quot;,ion_vy_mm,&quot;\n&quot;)<br/>
+        -- ion_splat=-2<br/>
+         <br/>
+         <br/>
+                    if (t[ion_number].f3==0) then<br/>
+               t[ion_number].f3=1<br/>
+              print (&quot;n_in=&quot;,t[ion_number].f3,&quot;  n=&quot;,ion_number)<br/>
+               end<br/>
+            end</b><br/>
+           <br/>
+end<br/>
+-- Called by SIMION on Fly'm.<br/>
+--function segment.flym()<br/>
+--simion.run(&quot;--noprompt &quot;)<br/><br/>
+--end<br/>
+function segment.fast_adjust()<br/>
+   if ion_instance==3 then<br/>
+    --adj_elect05 = _G.voltage     -- sets central electrode voltage<br/>
+   end<br/>
+          --if ion_instance==3 then<br/>
+    --adj_elect01 = 55     -- sets central electrode voltage<br/>
+    --end<br/>
+          --if ion_instance==3 then<br/>
+    ---dj_elect02 = -55     -- sets central electrode voltage<br/>
+    --end<br/>
+    <br/>
+    <br/>
+    <br/>
+     --if ion_instance==2 then<br/>
+    --adj_elect01 = 55<br/>
+    --end<br/>
+          --if ion_instance==2 then<br/>
+    --adj_elect02 = -55     -- sets central electrode voltage<br/>
+    --end<br/>
+    <br/>
+    <br/>
+    <br/>
+     --if ion_instance==1 then<br/>
+    --adj_elect01 = 55<br/>
+    --end<br/>
+     --     if ion_instance==1 then<br/>
+    --adj_elect02 = -55     -- sets central electrode voltage<br/>
+    --end<br/>
+    <br/>
+end<br/><br/>
+-- called exactly once on end of each run termination.<br/>
+function segment.terminate_run()<br/>
+    <br/>
+     <b>print (&quot;n_in=&quot;,n_in)<br/>
+     k1=0<br/>
+     k2=0<br/>
+     k3=0<br/>
+     for i=1,#t  do<br/>
+          if t[i].f1==1 then<br/>
+          k1=k1+1<br/>
+          end<br/>
+          if t[i].f2==1 then<br/>
+          k2=k2+1<br/>
+          end<br/>
+          if t[i].f3==1 then<br/>
+          k3=k3+1<br/>
+          end<br/>
+     end<br/>
+     FileHnd:write(k1,&quot; &quot;,k2,&quot; &quot;,k3,&quot;\n&quot;)<br/>
+       FileHnd:close()</b><br/>
+     print(&quot;k1=&quot;,k1,&quot;k2=&quot;,k2,&quot;k3=&quot;,k3)<br/>
+end<br/><br/>
+function segment.tstep_adjust()<br/>
+   ion_time_step = math.min(ion_time_step, step_size)<br/><br/>
+end</div></div></span>
+</div></body></html> 
