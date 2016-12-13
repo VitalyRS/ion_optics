@@ -1,0 +1,84 @@
+
+$(_G.k=5)
+$(k=_G.k)
+
+
+$(L=16)
+pa_define($(350*k+1),$(25*k+1),1,cylindrical,non-mirrored,Elect, ,$(1/k)) ;
+
+
+
+locate($(0),0,0,1,0,0,0) ;
+     {
+     e(15)      {include(some)}
+	 }
+
+
+locate($(0+L),0,0,1,0,0,0) ;
+     {
+     e(13)      {include(entr)}
+	 }
+locate($(L+1),0,0,1,0,0,0) ;
+     {
+     e(14)      {include(enttof)}
+	 }
+
+	 
+locate($(L+1),0,0,1,0,0,0) ;
+     {
+     e(1)      {include(el1)}
+	 }
+locate($(L+2),0,0,1,0,0,0) ;
+     {
+     e(2)      {include(el2)}
+	 }	 
+locate($(L+19),0,0,1,0,0,0) ;
+     {
+     e(3)      {include(el3)}
+	 }	 
+locate($(L+20),0,0,1,0,0,0) ;
+     {
+     e(4)      {include(el4)}
+	 }	 
+locate($(L+34),0,0,1,0,0,0) ;
+     {
+     e(5)      {include(elgr)}
+	 }	 
+
+	 
+locate($(L+35),0,0,1,0,0,0) ;
+     {
+     e(6)      {include(el5)}
+	 }	 
+locate($(L+80),0,0,1,0,0,0) ;
+     {
+     e(7)      {include(el6)}
+	 }	 
+locate($(L+130),0,0,1,0,0,0) ;
+     {
+     e(8)      {include(el7)}
+	 }	 
+locate($(L+180),0,0,1,0,0,0) ;
+     {
+     e(9)      {include(el8)}
+	 }	 
+locate($(L+230),0,0,1,0,0,0) ;
+     {
+     e(10)      {include(el9)}
+	 }	 
+locate($(L+279),0,0,1,0,0,0) ;
+     {
+     e(11)      {include(stop)}
+	 }	 
+	 
+;Format: box(xmin, ymin, xmax, ymax)
+;Default Values: box(0,0,10,10)
+;Class: Test Class
+;When Legal: Within Nesting Level
+;Defines 2D box (e.g. on current xy plane: z = 0). Parameters define the 2D min. and max.
+;corner locations of the box. The box extends plus or minus 106 in z. Returns TRUE if point
+;within its bounds.
+;box(-5,,50,60)
+;Defines 2D box with lower left corner at -5x, 0y and upper right corner at 50x, 60y. zmin is
+;-106 and zmax is 106.
+

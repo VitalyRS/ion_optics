@@ -1,0 +1,13 @@
+
+locate(0,0,0,1,0,0,0);
+{
+          fill  ;
+               {
+              ; within{polyline(	0,0,0,11.1,	43,11.1 )}
+				;notin{polyline(	1,0,1,10.1,	43,10.1	 )}
+				within{box(0,0,43,11.1)	}		 
+				notin{box(0,0,43,10.1)}		
+				}
+               
+}              
+               
