@@ -72,23 +72,22 @@ end
 
 
 function segment.mfield_adjust()
-	--if ion_px_mm<16 then
+	if ion_px_mm<16 then
 		ion_bfieldx_gu = bx
 		ion_bfieldy_gu = by
 		ion_bfieldz_gu = bz
-	--else
+	else
 		
-		--ion_bfieldx_gu = 0
-		--ion_bfieldy_gu = 0
-		--ion_bfieldz_gu = 0
-	--end
+		ion_bfieldx_gu = 0
+		ion_bfieldy_gu = 0
+		ion_bfieldz_gu = 0
+	end
 end
 
 function segment.other_actions()
 	if  ((math.abs(ion_py_mm)>5) or (math.abs(ion_pz_mm)>5)) and (ion_px_mm<35)  then
 		_G.Hnd:write(ion_time_of_flight,"\t",
-		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
-			"\t",ion_number,"\t",ion_color,"\n")
+		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,"\n")
 		ion_splat=-2
 		print('i am here 1st')
 		
@@ -97,8 +96,7 @@ function segment.other_actions()
 	if  (ion_px_mm>=93)  then
 		
 		_G.Hnd:write(ion_time_of_flight,"\t",
-		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
-			"\t",ion_number,"\t",ion_color,"\n")
+		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,"\n")
 		ion_splat=-2
 		
 		print('i am here 2d')

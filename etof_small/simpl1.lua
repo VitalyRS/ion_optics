@@ -1,8 +1,8 @@
 simion.workbench_program()
 
-adjustable bx = _G.bx   -- gauss
-adjustable by = _G.by     -- gauss
-adjustable bz = _G.bz     -- gauss
+adjustable bx = -0.9--gauss
+adjustable by = 0    -- gauss
+adjustable bz = -0.3 -- gauss
 
 
 local electrode1=0
@@ -10,9 +10,9 @@ local electrode2=0
 local electrode13=0
 local electrode14=0
 
-local electrode3=_G.electrode3
-local electrode4=_G.electrode4
-local electrode5=_G.electrode5
+local electrode3=0
+local electrode4=0
+local electrode5=0
 
 
 local electrode6=electrode5
@@ -21,15 +21,8 @@ local electrode8=3
 local electrode9=2.1
 local electrode10=7
 local electrode11=electrode10
-local electrode15=-5 -- sample
+local electrode15=-5--sample
 
---main_folder=_G.frun.."\\"
---FIL=main_folder.."test.dat"
-
---FIL="test.dat"
---FileHnd, ErrStr = io.open(FIL, "w")
---FileHnd:write("ion_time_of_flight","\t",
---	"ion_px_mm ","\t","ion_py_mm ","\t","ion_pz_mm ","\t","bx","\t","by","\t","bz","\t","el3","\t","el4","\t","el5","\n")
 
 function segment.init_p_values()
 	adj_elect01=electrode1
@@ -72,37 +65,15 @@ end
 
 
 function segment.mfield_adjust()
-	--if ion_px_mm<16 then
+	
 		ion_bfieldx_gu = bx
 		ion_bfieldy_gu = by
 		ion_bfieldz_gu = bz
-	--else
-		
-		--ion_bfieldx_gu = 0
-		--ion_bfieldy_gu = 0
-		--ion_bfieldz_gu = 0
-	--end
+	
 end
 
 function segment.other_actions()
-	if  ((math.abs(ion_py_mm)>5) or (math.abs(ion_pz_mm)>5)) and (ion_px_mm<35)  then
-		_G.Hnd:write(ion_time_of_flight,"\t",
-		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
-			"\t",ion_number,"\t",ion_color,"\n")
-		ion_splat=-2
-		print('i am here 1st')
-		
-	end
 	
-	if  (ion_px_mm>=93)  then
-		
-		_G.Hnd:write(ion_time_of_flight,"\t",
-		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
-			"\t",ion_number,"\t",ion_color,"\n")
-		ion_splat=-2
-		
-		print('i am here 2d')
-	end
 end
 
 

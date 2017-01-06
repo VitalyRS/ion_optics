@@ -8,7 +8,7 @@ end
 
 
 
-_G.frun="test05.csv"
+_G.frun="test04.csv"
 _G.electrode3=0 --   - electrode 3 voltge
 _G.electrode4=0 --   - electrode 4 voltge
 _G.electrode5=0 --   - electrode 5 voltge
@@ -18,8 +18,7 @@ _G.bz=0 --   - magnetic field bz in gauss
 FIL=_G.frun
 FileHnd, ErrStr = io.open(FIL, "w")
 FileHnd:write("ion_time_of_flight","\t",
-	"ion_px_mm ","\t","ion_py_mm ","\t","ion_pz_mm ","\t","bx","\t","by","\t","bz","\t","el3","\t","el4","\t","el5",
-	"\t","ion_number","\t","ion_color","\n")
+	"ion_px_mm ","\t","ion_py_mm ","\t","ion_pz_mm ","\t","bx","\t","by","\t","bz","\t","el3","\t","el4","\t","el5","\n")
 
 --main_dir="mkdir ".._G.frun
 --os.execute( main_dir)
