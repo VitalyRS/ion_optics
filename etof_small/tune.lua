@@ -8,7 +8,7 @@ end
 
 
 
-_G.frun="test05.csv"
+_G.frun="test06.csv"
 _G.electrode3=0 --   - electrode 3 voltge
 _G.electrode4=0 --   - electrode 4 voltge
 _G.electrode5=0 --   - electrode 5 voltge
@@ -32,8 +32,8 @@ FileHnd:write("ion_time_of_flight","\t",
 --os.execute(cop3)
 _G.Hnd=FileHnd
 
-step1=0.3
-step2=1
+step1=0.2
+step2=0.5
 for bx=-0.9,0.9,step1 do
 	for by=-0.9	,0.9,step1 do
 		for bz=-0.9,0.9,step1 do

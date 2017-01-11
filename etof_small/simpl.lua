@@ -3,7 +3,7 @@ simion.workbench_program()
 adjustable bx = _G.bx   -- gauss
 adjustable by = _G.by     -- gauss
 adjustable bz = _G.bz     -- gauss
-
+adjustable step_size = 0.001 
 
 local electrode1=0
 local electrode2=0
@@ -86,15 +86,15 @@ end
 
 function segment.other_actions()
 	if  ((math.abs(ion_py_mm)>5) or (math.abs(ion_pz_mm)>5)) and (ion_px_mm<35)  then
-		_G.Hnd:write(ion_time_of_flight,"\t",
-		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
-			"\t",ion_number,"\t",ion_color,"\n")
+		--_G.Hnd:write(ion_time_of_flight,"\t",
+		--ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
+		--	"\t",ion_number,"\t",ion_color,"\n")
 		ion_splat=-2
 		print('i am here 1st')
 		
 	end
 	
-	if  (ion_px_mm>=93)  then
+	if  (ion_px_mm>=65)  then
 		
 		_G.Hnd:write(ion_time_of_flight,"\t",
 		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
@@ -114,4 +114,10 @@ function segment.flym()
 simion.run("--nogui --quiet ")
 
 end
+
+function segment.tstep_adjust()
+   ion_time_step = math.min(ion_time_step, step_size)
+
+end
+
 
