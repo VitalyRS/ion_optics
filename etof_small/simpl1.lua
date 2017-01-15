@@ -1,10 +1,10 @@
 simion.workbench_program()
 
 adjustable bx = -0.9--gauss
-adjustable by = 0    -- gauss
-adjustable bz = -0.3 -- gauss
+adjustable by = 0.3   -- gauss
+adjustable bz = -0.5 -- gauss
 
-adjustable step_size = 0.000001 
+adjustable step_size = 0.0001 
 
 local e1=0
 local e2=0
@@ -16,8 +16,8 @@ adjustable e4=4
 adjustable e5=5
 
 
-local e6=e5
-local e7=2.1
+local e6=-3
+local e7=0
 local e8=3
 local e9=2.1
 local e10=7
@@ -79,7 +79,7 @@ function segment.other_actions()
 		print (ion_time_of_flight,"\t",
 		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
 			"\t",ion_number,"\t",ion_color,"\n")
-		ion_splat=-2
+	
 		print('i am here 1st')
 		
 	end
@@ -89,7 +89,7 @@ function segment.other_actions()
 		print(ion_time_of_flight,"\t",
 		ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
 			"\t",ion_number,"\t",ion_color,"\n")
-		ion_splat=-2
+	
 		
 		print('i am here 2d')
 	end
