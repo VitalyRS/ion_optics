@@ -1,13 +1,13 @@
 simion.workbench_program()
 
-adjustable bx = -0.9--gauss
+adjustable bx = 0.3--gauss
 adjustable by = 0.3   -- gauss
-adjustable bz = -0.5 -- gauss
+adjustable bz = -0.6 -- gauss
 
 adjustable step_size = 0.0001 
 
 
-FIL="test08.csv"	
+FIL="test_El01.csv"	
 FileHnd, ErrStr = io.open(FIL, "w")
 
 local e1=0
@@ -89,7 +89,7 @@ function segment.other_actions()
 		
 	end
 	
-	if  (ion_px_mm>=90)  then
+	if  (ion_px_mm>=60)  then
 		
 		--print(ion_time_of_flight,"\t",
 		--ion_px_mm ,"\t",ion_py_mm ,"\t",ion_pz_mm ,"\t",bx,"\t",by,"\t",bz,"\t",electrode3,"\t",electrode4,"\t",electrode5,
@@ -118,15 +118,15 @@ FileHnd:write("ion_time_of_flight","\t",
 	
 	
 	step1=0.3
-	step2=0.5
+	step2=1.0
 	for bx1=-0.9,0.9,step1 do
 		--by=bx
 		for by1=-0.9,0.9,step1 do
 			for bz1=-0.9,0.9,step1 do
 				
-				for e3a=-5,5,step2 do
-					for e4a=-5,5,step2 do
-						for e5a=-5,5,step2 do
+				for e3a=-8,8,step2 do
+					for e4a=-8,8,step2 do
+						for e5a=-8,8,step2 do
 						
 						
 						--simion.command("fly --restore-potentials=0   simpl.iob")
